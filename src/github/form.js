@@ -32,7 +32,6 @@ export default function Form() {
         setDetails((p) => {
           return { ...data };
         });
-        console.log(username.username);
       } catch (err) {
         setIsError((p) => true);
         setDetails((p) => {
@@ -58,7 +57,7 @@ export default function Form() {
         setDetails((p) => {
           return { ...data };
         });
-        console.log(username.username);
+        // console.log(username.username);
       } catch (err) {
         setIsLoading(false);
 
@@ -93,7 +92,7 @@ export default function Form() {
       });
     }
   };
-  console.log(formSubmit);
+  // console.log(formSubmit);
   return (
     <>
       <form>
