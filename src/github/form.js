@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import axios from "axios";
 export default function Form() {
@@ -6,6 +6,7 @@ export default function Form() {
   let [username, setUsername] = useState({ username: "", isValid: false });
   let [buttonValid, setButtonValid] = useState(false);
   let [formSubmit, setFormSubmit] = useState(false);
+  let [isLoading, setIsLoading] = useState(false);
   let baseUrl = "https://api.github.com/users";
   let [details, setDetails] = useState({});
 
@@ -16,14 +17,16 @@ export default function Form() {
   //
   //     </>
   //   );
-  let afterSubmit = (e) => {
+  // useEffect(() => {
+  //   console.log("fuck");
+  // }, []);
+  useEffect(function () {
     let somS = async () => {
       setIsError((p) => false);
       try {
-        e.preventDefault();
         setFormSubmit((p) => true);
-        console.log(username);
-        let x = await axios.get(`${baseUrl}/${username.username}`);
+
+        let x = await axios.get("https://api.github.com/users/SomSingh23");
         let data = x.data;
 
         setDetails((p) => {
@@ -31,6 +34,34 @@ export default function Form() {
         });
         console.log(username.username);
       } catch (err) {
+        setIsError((p) => true);
+        setDetails((p) => {
+          return { error: err.message };
+        });
+      }
+    };
+    somS();
+  }, []);
+  let afterSubmit = (e) => {
+    let somS = async () => {
+      setIsError((p) => false);
+      try {
+        e.preventDefault();
+        setIsLoading(true);
+        setFormSubmit((p) => false);
+        // console.log(username);
+
+        let x = await axios.get(`${baseUrl}/${username.username}`);
+        setFormSubmit((p) => true);
+        let data = x.data;
+        setIsLoading(false);
+        setDetails((p) => {
+          return { ...data };
+        });
+        console.log(username.username);
+      } catch (err) {
+        setIsLoading(false);
+
         setIsError((p) => true);
         setDetails((p) => {
           return { error: err.message };
@@ -75,6 +106,7 @@ export default function Form() {
         ></input>
         {buttonValid && <button onClick={afterSubmit}>Submit</button>}
       </form>
+      {isLoading && <h4>Loading....</h4>}
       {isError && <h4>Enter Correct UserName</h4>}
       {formSubmit && !isError && (
         <div>
