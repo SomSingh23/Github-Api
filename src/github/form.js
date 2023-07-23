@@ -78,7 +78,7 @@ export default function Form() {
       {isError && <h4>Enter Correct UserName</h4>}
       {formSubmit && !isError && (
         <div>
-          <p>DATA</p>
+          <h3>USER-DATA</h3>
           <p>{details.login}</p>
           <p>{details.location}</p>
           <p>{details.bio}</p>
