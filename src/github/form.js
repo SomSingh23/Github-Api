@@ -9,17 +9,6 @@ export default function Form() {
   let [isLoading, setIsLoading] = useState(false);
   let baseUrl = "https://api.github.com/users";
   let [details, setDetails] = useState({});
-
-  //   fetchData();
-  //   console.log(details.bio);
-  //   return (
-  //     <>
-  //
-  //     </>
-  //   );
-  // useEffect(() => {
-  //   console.log("fuck");
-  // }, []);
   useEffect(function () {
     let somS = async () => {
       setIsError((p) => false);
@@ -92,7 +81,6 @@ export default function Form() {
       });
     }
   };
-  // console.log(formSubmit);
   return (
     <>
       <form>
