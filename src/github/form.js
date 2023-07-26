@@ -105,7 +105,7 @@ export default function Form() {
             height="200px"
             width="200px"
             src={details.avatar_url}
-            alt="dam"
+            alt="avatar"
           />
         </div>
       )}
